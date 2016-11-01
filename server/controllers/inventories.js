@@ -12,11 +12,13 @@ function listbypage(req,res,net){
   let skip = (req.params.page-1)*5
   let limit = 5
   Inventories.find({}).skip(skip).limit(5).exec((err,inventories)=>{
+    Inventories.count({}, function(err, total_record){
       if(err){
         res.json({message: "error", detail: err})
       } else {
-        res.json(inventories)
+        res.json({dataInventories:inventories,totalRecord:total_record})
       }
+    })
   })
 }
 function insert(req,res,next){
@@ -27,7 +29,19 @@ function insert(req,res,next){
       url:req.body.url
     })
     items.save()
-    res.json(items)
+
+    let limit=5
+    let skip=0
+    Inventories.find({}).skip(skip).limit(5).exec((err,inventories)=>{
+      Inventories.count({}, function(err, total_record){
+        if(err){
+          res.json({message: "error", detail: err})
+        } else {
+          res.json({dataInventories:inventories,totalRecord:total_record})
+        }
+      })
+    })
+
 }
 
 function update(req,res,next){

@@ -6,19 +6,20 @@ export default function data(state = initialState, action){
   switch (action.type){
     case ADD_DATA:
     console.log('ini state adddata',state)
-    return [
-      {
-        id: action.id,
-        name: action.name,
-        price: action.price,
-        url: action.url
-      },
-      ...state
-    ]
+    let dataArr = state.dataInventories
+    dataArr.push({
+      id: action.id,
+      name: action.name,
+      price: action.price,
+      url: action.url
+    })
+    console.log('dataArr',dataArr);
+    return dataArr
 
     case ADD_INVENTORIES_SUCCESS:
+
     let inventories = state
-    console.log('state', state)
+    console.log('stateggggg', state)
     let idObject = inventories.map(function(x){
       return x.id
     }).indexOf(action.inventories.id)

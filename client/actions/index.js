@@ -48,6 +48,9 @@ export function loadInventoriesSuccess(inventories){
   return {type: types.LOAD_INVENTORIES_SUCCESS, inventories}
 }
 
+export function addInventoriesSuccess(inventories){
+  return {type: types.ADD_INVENTORIES_SUCCESS, inventories}
+}
 
 //addData
 export function addInventories(name,price,url){
@@ -65,7 +68,8 @@ export function addInventories(name,price,url){
         if(err){
           dispatch(addInventoriesFailure())
         }else{
-          dispatch(addInventoriesSuccess(res.body))
+          console.log('SUKSES');
+          dispatch(loadInventoriesSuccess(res.body))
         }
       })
   }

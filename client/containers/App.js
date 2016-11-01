@@ -35,7 +35,7 @@ class App extends Component{
           <div className="panel panel-default">
             <div className="panel-heading">Add Products</div>
             <div className="panel-body">
-              <AppTextInput name="" price="" url="" count={this.props.totalrecord} onSave={actions.addInventories}/>
+              <AppTextInput name="" price="" url="" onSave={actions.addInventories}/>
             </div>
           </div>
 

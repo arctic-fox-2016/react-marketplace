@@ -39,7 +39,7 @@ var Comment = React.createClass({
 var CommentList = React.createClass({
   render: function(){
     console.log("test props",this.props.data)
-    var commentNodes = this.props.data.map(function(comment){
+    var commentNodes = this.props.data.dataInventories.map(function(comment){
       return(
         <Comment author={comment.author} key={comment.id} dataId={comment.id}>
         {comment.text}
