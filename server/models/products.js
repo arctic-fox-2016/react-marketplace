@@ -5,7 +5,8 @@ let productsSchema = new Schema({
   name: String,
   summary: String,
   description: String,
-  image: String
+  image: String,
+  product_id: String
 })
 
 let Products = mongoose.model('products', productsSchema)
