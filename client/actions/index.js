@@ -64,7 +64,7 @@ export function addInventories(name,price,url){
         if(err){
           dispatch(addInventoriesFailure())
         }else{
-          dispatch(loadInventoriesSuccess(res.body))
+          dispatch(addInventoriesSuccess(res.body))
         }
       })
   }

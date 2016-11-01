@@ -5,6 +5,7 @@ const initialState = []
 export default function data(state = initialState, action){
   switch (action.type){
     case ADD_DATA:
+    console.log('ini state adddata',state)
     return [
       {
         id: action.id,
@@ -17,6 +18,7 @@ export default function data(state = initialState, action){
 
     case ADD_INVENTORIES_SUCCESS:
     let inventories = state
+    console.log('state', state)
     let idObject = inventories.map(function(x){
       return x.id
     }).indexOf(action.inventories.id)
@@ -24,6 +26,7 @@ export default function data(state = initialState, action){
     if(idObject > -1){
       return state
     }else{
+      console.log("actioninv", action.inventories)
       return [action.inventories,...state]
     }
 
@@ -53,6 +56,7 @@ export default function data(state = initialState, action){
     return state;
 
     default:
+    console.log("ini state awal",state)
     return state
   }
 }

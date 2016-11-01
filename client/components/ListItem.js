@@ -9,7 +9,9 @@ class ListItem extends Component{
 
 render(){
   const {data, actions} = this.props
+  console.log('this.data', data)
   let nodeData = data.map(function(data){
+    console.log('iya')
     return(
         <DataItem key={data.id} data={data} {...actions}/>
     )
