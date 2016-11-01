@@ -16,4 +16,6 @@ router.put('/api/inventories/:id', inventoriesController.update)
 router.delete('/api/inventories/:id', inventoriesController.hapus)
 router.get('/api/inventories/:id', inventoriesController.detail)
 
+router.get('/api/inventories/page/:page', inventoriesController.listbypage)
+
 module.exports = router;

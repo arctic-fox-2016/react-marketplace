@@ -7,8 +7,15 @@ import SearchText from '../components/SearchText'
 import * as AppActions from '../actions'
 
 class App extends Component{
+  constructor(props,context){
+    super(props,context)
+    this.state={
+      page:1
+    }
+  }
+
   componentDidMount(){
-    this.props.actions.loadInventories()
+    this.props.actions.loadInventories(this.state.page)
   }
   render(){
       const {data,actions} = this.props
@@ -28,7 +35,7 @@ class App extends Component{
           <div className="panel panel-default">
             <div className="panel-heading">Add Products</div>
             <div className="panel-body">
-              <AppTextInput name="" price="" url="" onSave={actions.addInventories}/>
+              <AppTextInput name="" price="" url="" count={this.props.totalrecord} onSave={actions.addInventories}/>
             </div>
           </div>
 
@@ -49,11 +56,12 @@ class App extends Component{
 
 App.propTypes = {
   data: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  totalrecord: PropTypes.number
 }
 
 function mapStateToProps(state){
-  return {data: state.data}
+  return {data: state.data,totalrecord: state.data.count}
 }
 
 function mapDispatchToProps(dispath){

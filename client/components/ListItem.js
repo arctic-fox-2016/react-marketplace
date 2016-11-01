@@ -4,14 +4,19 @@ import DataItem from './DataItem'
 class ListItem extends Component{
   constructor(props, context){
     super(props,context)
+    this.state={
+      page:1,
+      totalRecord:1
+    }
   }
 
 
 render(){
   const {data, actions} = this.props
-  console.log('this.data', data)
+  var totalRecord = this.props.data.length
+  console.log('this',this);
+  console.log('totalRecord',totalRecord);
   let nodeData = data.map(function(data){
-    console.log('iya')
     return(
         <DataItem key={data.id} data={data} {...actions}/>
     )

@@ -5,9 +5,20 @@ module.exports = {
   display: display,
   update:update,
   hapus:hapus,
-  detail:detail
+  detail:detail,
+  listbypage:listbypage
 }
-
+function listbypage(req,res,net){
+  let skip = (req.params.page-1)*5
+  let limit = 5
+  Inventories.find({}).skip(skip).limit(5).exec((err,inventories)=>{
+      if(err){
+        res.json({message: "error", detail: err})
+      } else {
+        res.json(inventories)
+      }
+  })
+}
 function insert(req,res,next){
     var items = new Inventories({
       id:req.body.id,

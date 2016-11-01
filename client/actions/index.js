@@ -16,11 +16,12 @@ export function saveData(id,name,price,url){
 }
 
 
-export function loadInventories(){
+
+export function loadInventories(page){
   return dispatch => {
     dispatch(loadData());
     return request
-      .get(`${SERVER_URL}inventories`)
+      .get(`${SERVER_URL}inventories/page/${page}`)
       .set('Accept','application/json')
       .end((err,res)=>{
         if(err){
