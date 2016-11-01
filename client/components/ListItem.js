@@ -17,7 +17,7 @@ render(){
   return(
     <table className="table table-striped">
       <tr>
-        <th>#</th><th>Name</th><th>Phone</th><th>Actions</th>
+        <th>#</th><th>Name</th><th>Price</th><th>Product</th><th>Actions</th>
       </tr>
         {nodeData}
       </table>

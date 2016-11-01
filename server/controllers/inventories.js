@@ -10,6 +10,7 @@ module.exports = {
 
 function insert(req,res,next){
     var items = new Inventories({
+      id:req.body.id,
       name:req.body.name,
       price:req.body.price,
       url:req.body.url
@@ -22,6 +23,7 @@ function update(req,res,next){
   Inventories.findOne({
     _id:req.params.id
   },(err,items) => {
+      items.id = req.body.id
       items.name = req.body.name
       items.price = req.body.price
       items.url = req.body.url

@@ -1,4 +1,4 @@
-import {ADD_DATA, DELETE_DATA, UPDATE_DATA, SEARCH_DATA_NAME, SEARCH_DATA_PHONE,LOAD_DATA,LOAD_PHONEBOOKS_SUCCESS,LOAD_PHONEBOOKS_FAILURE, ADD_PHONEBOOKS_SUCCESS, ADD_PHONEBOOKS_FAILURE} from '../constants/ActionTypes'
+import {ADD_DATA, DELETE_DATA, UPDATE_DATA, LOAD_DATA,LOAD_INVENTORIES_SUCCESS,LOAD_INVENTORIES_FAILURE, ADD_INVENTORIES_SUCCESS, ADD_INVENTORIES_FAILURE} from '../constants/ActionTypes'
 
 const initialState = []
 
@@ -9,21 +9,22 @@ export default function data(state = initialState, action){
       {
         id: action.id,
         name: action.name,
-        phone: action.phone
+        price: action.price,
+        url: action.url
       },
       ...state
     ]
 
-    case ADD_PHONEBOOKS_SUCCESS:
-    let phonebooks = state
-    let idObject = phonebooks.map(function(x){
+    case ADD_INVENTORIES_SUCCESS:
+    let inventories = state
+    let idObject = inventories.map(function(x){
       return x.id
-    }).indexOf(action.phonebooks.id)
+    }).indexOf(action.inventories.id)
     //if id is exist
     if(idObject > -1){
       return state
     }else{
-      return [action.phonebook,...state]
+      return [action.inventories,...state]
     }
 
 
@@ -34,7 +35,8 @@ export default function data(state = initialState, action){
       let updatedData = state.map(function(eachData){
         if(action.id==eachData.id){
           eachData.name=action.name
-          eachData.phone=action.phone
+          eachData.price=action.price
+          eachData.url=action.url
           return eachData
         } else{
           return eachData
@@ -43,17 +45,14 @@ export default function data(state = initialState, action){
     return updatedData
     case LOAD_DATA:
     return []
-    case LOAD_PHONEBOOKS_SUCCESS:
-    return action.phonebooks
+    case LOAD_INVENTORIES_SUCCESS:
+    return action.inventories
 
-    case LOAD_PHONEBOOKS_FAILURE:
-    case ADD_PHONEBOOKS_FAILURE:
+    case LOAD_INVENTORIES_FAILURE:
+    case ADD_INVENTORIES_FAILURE:
     return state;
 
     default:
     return state
-
-
-
   }
 }

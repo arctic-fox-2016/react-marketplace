@@ -5,7 +5,8 @@ class SearchText extends Component{
     super(props,context)
     this.state = {
       name : this.props.name || '',
-      phone : this.props.phone || ''
+      price : this.props.price || '',
+      url : this.props.url || ''
     }
   }
 
@@ -14,10 +15,15 @@ class SearchText extends Component{
     this.props.searchDataName(name)
     this.setState({name:e.target.value})
   }
-  handlePhoneChange(e){
-    var phone = e.target.value
-    this.props.searchDataPhone(phone)
-    this.setState({phone:e.target.value})
+  handlePriceChange(e){
+    var price = e.target.value
+    this.props.searchDataPrice(price)
+    this.setState({price:e.target.value})
+  }
+  handleUrlChange(e){
+    var url = e.target.url
+    this.props.searchDataUrl(url)
+    this.setState({url:e.target.value})
   }
 
 
@@ -30,8 +36,10 @@ class SearchText extends Component{
           <div className="form-group">
             <label for="Name"> Name</label>
             <input className="form-control"  type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} style={styleTBName} />
-            <label for="Phone"> Phone</label>
-            <input className="form-control"  type="text" value={this.state.phone} onChange={this.handlePhoneChange.bind(this)} />
+            <label for="Price"> Price</label>
+            <input className="form-control"  type="text" value={this.state.price} onChange={this.handlePriceChange.bind(this)} />
+            <label for="Price"> URL</label>
+            <input className="form-control"  type="text" value={this.state.url} onChange={this.handleUrlChange.bind(this)} />
           </div>
         </div>
     )
@@ -40,7 +48,9 @@ class SearchText extends Component{
 
 SearchText.propTypes = {
   name: PropTypes.string,
-  phone: PropTypes.string,
-  searchDataPhone: PropTypes.func.isRequired
+  price: PropTypes.string,
+  searchDataPrice: PropTypes.func.isRequired,
+  searchDataName: PropTypes.func.isRequired,
+  searchDataUrl: PropTypes.func.isRequired
 }
 export default SearchText

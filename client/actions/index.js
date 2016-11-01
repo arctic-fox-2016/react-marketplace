@@ -3,38 +3,31 @@ import request from 'superagent'
 
 const SERVER_URL = 'http://localhost:3001/api/'
 
-export function addData(id,name, phone){
-  return {type: types.ADD_DATA, id, name, phone}
+export function addData(id,name, price, url){
+  return {type: types.ADD_DATA, id, name, price, url}
 }
 
 export function deleteData(id){
   return {type: types.DELETE_DATA, id}
 }
 
-export function saveData(id,name,phone){
-  return {type: types.UPDATE_DATA, id,name,phone}
+export function saveData(id,name,price,url){
+  return {type: types.UPDATE_DATA, id,name,price,url}
 }
 
-export function searchDataName(name){
-  return {type: types.SEARCH_DATA_NAME,name}
-}
 
-export function searchDataPhone(phone){
-  return {type: types.SEARCH_DATA_PHONE,phone}
-}
-
-export function loadPhoneBooks(){
+export function loadInventories(){
   return dispatch => {
     dispatch(loadData());
     return request
-      .get(`${SERVER_URL}phonebooks`)
+      .get(`${SERVER_URL}inventories`)
       .set('Accept','application/json')
       .end((err,res)=>{
         if(err){
           console.log(err);
-          dispatch(loadPhoneBooksFailure())
+          dispatch(loadInventoriesFailure())
         }else{
-          dispatch(loadPhoneBooksSuccess(res.body))
+          dispatch(loadInventoriesSuccess(res.body))
         }
       })
   }
@@ -46,40 +39,33 @@ export function loadData(){
   return {type: types.LOAD_DATA}
 }
 
-export function loadPhoneBooksFailure(){
-  return {type: types.LOAD_PHONEBOOKS_FAILURE}
+export function loadInventoriesFailure(){
+  return {type: types.LOAD_INVENTORIES_FAILURE}
 }
 
-export function loadPhoneBooksSuccess(phonebooks){
-  return {type: types.LOAD_PHONEBOOKS_SUCCESS, phonebooks}
+export function loadInventoriesSuccess(inventories){
+  return {type: types.LOAD_INVENTORIES_SUCCESS, inventories}
 }
 
 
 //addData
-export function addPhoneBooks(name,phone){
+export function addInventories(name,price,url){
   let id = Date.now()
   return dispatch => {
-    dispatch(addData(id,name,phone))
+    dispatch(addData(id,name,price,url))
     return request
-      .post(`${SERVER_URL}phonebooks`)
+      .post(`${SERVER_URL}inventories`)
       .type('form')
       .send({id:id})
       .send({name:name})
-      .send({phone:phone})
+      .send({price:price})
+      .send({url:url})
       .end((err,res)=> {
         if(err){
-          dispatch(addPhoneBookFailure())
+          dispatch(addInventoriesFailure())
         }else{
-          dispatch(addPhoneBookSuccess(res.body))
+          dispatch(loadInventoriesSuccess(res.body))
         }
       })
   }
-}
-
-export function addPhoneBookFailure(){
-  return {types:ADD_PHONEBOOKS_FAILURE}
-}
-
-export function addPhoneBookSuccess(phonebook){
-  return {types:ADD_PHONEBOOKS_SUCCESS, phonebook}
 }

@@ -8,7 +8,7 @@ import * as AppActions from '../actions'
 
 class App extends Component{
   componentDidMount(){
-    this.props.actions.loadPhoneBooks()
+    this.props.actions.loadInventories()
   }
   render(){
       const {data,actions} = this.props
@@ -26,9 +26,9 @@ class App extends Component{
           </div>
 
           <div className="panel panel-default">
-            <div className="panel-heading">Add Form</div>
+            <div className="panel-heading">Add Products</div>
             <div className="panel-body">
-              <AppTextInput name="" phone="" onSave={actions.addPhoneBooks}/>
+              <AppTextInput name="" price="" url="" onSave={actions.addInventories}/>
             </div>
           </div>
 

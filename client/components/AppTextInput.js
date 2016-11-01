@@ -4,27 +4,33 @@ class AppTextInput extends Component{
   constructor(props,context){
     super(props,context)
     this.state = {
+      id: this.props.id || '',
       name : this.props.name || '',
-      phone : this.props.phone || ''
+      price : this.props.price || '',
+      url : this.props.url || ''
     }
   }
 
   handleNameChange(e){
     this.setState({name:e.target.value})
   }
-  handlePhoneChange(e){
-    this.setState({phone:e.target.value})
+  handlePriceChange(e){
+    this.setState({price:e.target.value})
+  }
+  handleUrlChange(e){
+    this.setState({url:e.target.value})
   }
 
   handleSubmit(e){
     e.preventDefault()
     var name = this.state.name.trim().toUpperCase()
-    var phone = this.state.phone.trim()
-    if(!name || !phone){
+    var price = this.state.price.trim()
+    var url = this.state.url.trim()
+    if(!name || !price || !url){
       return
     }
-    this.props.onSave(name,phone)
-    this.setState({name:'', phone:''})
+    this.props.onSave(name,price,url)
+    this.setState({name:'', price:'', url:''})
   }
 
   render(){
@@ -36,8 +42,10 @@ class AppTextInput extends Component{
         <div class="form-group">
           <label for="Name"> Name</label>
           <input className="form-control"  type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} style={styleTBName} />
-          <label for="Phone"> Phone</label>
-          <input className="form-control"  type="text" value={this.state.phone} onChange={this.handlePhoneChange.bind(this)} />
+          <label for="Price"> Price</label>
+          <input className="form-control"  type="text" value={this.state.price} onChange={this.handlePriceChange.bind(this)} />
+          <label for="Price"> URL</label>
+          <input className="form-control"  type="text" value={this.state.url} onChange={this.handleUrlChange.bind(this)} />
           <button type="submit" className="btn btn-primary">Save</button>
         </div>
       </form>
@@ -46,8 +54,10 @@ class AppTextInput extends Component{
 }
 
 AppTextInput.propTypes = {
+  id: PropTypes.string,
   name: PropTypes.string,
-  phone: PropTypes.string,
+  price: PropTypes.string,
+  url: PropTypes.string,
   onSave: PropTypes.func.isRequired
 }
 export default AppTextInput
