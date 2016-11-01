@@ -13,29 +13,29 @@ export function loadProductsFail(){
   return {type: "LOAD_PRODUCTS_FAIL"}
 }
 
-export function addProductToState(product_id, name, summary, description, image){
-  return {type: "ADD_PRODUCT_TO_STATE", product_id,name, summary, description, image}
+export function addProductToState(product_id, name, summary, description, image,page){
+  return {type: "ADD_PRODUCT_TO_STATE", product_id,name, summary, description, image,page}
 }
 
 export function addProductFail(){
   return {type: "ADD_PRODUCT_FAIL"}
 }
 
-export function addProductSuccess(product_id, name, summary, description, image){
-  return {type: "ADD_PRODUCT_SUCCESS",product_id,name, summary, description, image}
+export function addProductSuccess(product_id, name, summary, description, image,page){
+  return {type: "ADD_PRODUCT_SUCCESS",product_id,name, summary, description, image,page}
 }
 
-export function addProduct(name, summary, description, image){
+export function addProduct(name, summary, description, image, page){
   return dispatch => {
     let product_id = Date.now()
-    dispatch(addProductToState(product_id, name, summary, description, image))
+    dispatch(addProductToState(product_id, name, summary, description, image,page))
     return request.post(`${SERVER_URL}`).send({product_id: product_id, name: name, summary: summary, description: description, image: image}).end((err,res)=>{
       if(err){
         console.log(err)
         dispatch(addProductFail())
       } else {
         let product = res.body
-        dispatch(addProductSuccess(product.product_id, product.name, product.summary, product.description, product.image))
+        dispatch(addProductSuccess(product.product_id, product.name, product.summary, product.description, product.image, page))
       }
     })
   }
