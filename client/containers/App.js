@@ -18,7 +18,9 @@ class App extends Component{
     this.props.actions.loadInventories(this.state.page)
   }
   render(){
-      const {data,actions} = this.props
+      const data = this.props.data
+      const actions = this.props.actions
+      console.log('dataariadiprana',data);
       return(
       <div>
         <div className="container">
@@ -61,7 +63,7 @@ App.propTypes = {
 }
 
 function mapStateToProps(state){
-  return {data: state.data,totalrecord: state.data.count}
+  return {data: state.data,totalrecord: state.data.totalRecord}
 }
 
 function mapDispatchToProps(dispath){

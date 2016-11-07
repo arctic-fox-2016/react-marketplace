@@ -17,7 +17,8 @@ class ListItem extends Component{
   }
 
 render(){
-  const {data, actions} = this.props
+  const data = this.props.data
+  const actions = this.props.actions
   var totalRecord = this.props.data.totalRecord
 
   console.log('this',this);
@@ -37,7 +38,6 @@ render(){
       arrPage.push(<li key={i}><a title={i} onClick={this.handlePageChange.bind(this)}>{i}</a></li>)
     }
   }
-
   return(
       <div>
         <table className="table table-striped">
