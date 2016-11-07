@@ -30,6 +30,7 @@ class DataItem extends Component{
     var price = this.state.price.trim()
     var url = this.state.url.trim()
     var id = this.state.id
+    console.log('this.state',this.state);
     this.props.saveData(id,name,price,url)
     this.setState({update:false})
   }
@@ -40,8 +41,6 @@ class DataItem extends Component{
     var price = this.state.price.trim()
     var url = this.state.url.trim()
     var id = this.state.id
-    this.setState({update:true})
-
   }
 
   render(){

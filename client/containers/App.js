@@ -18,9 +18,8 @@ class App extends Component{
     this.props.actions.loadInventories(this.state.page)
   }
   render(){
-      const data = this.props.data
+      const data = this.props
       const actions = this.props.actions
-      console.log('dataariadiprana',data);
       return(
       <div>
         <div className="container">
@@ -57,7 +56,7 @@ class App extends Component{
 
 
 App.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   totalrecord: PropTypes.number
 }

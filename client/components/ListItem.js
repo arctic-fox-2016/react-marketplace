@@ -17,11 +17,9 @@ class ListItem extends Component{
   }
 
 render(){
-  const data = this.props.data
+  const data = this.props.data.data
   const actions = this.props.actions
-  var totalRecord = this.props.data.totalRecord
-
-  console.log('this',this);
+  var totalRecord = this.props.data.data.totalRecord
   console.log('totalRecord',totalRecord);
   console.log('dataInventories',data.dataInventories);
   let nodeData = data.dataInventories.map(function(data){
@@ -41,10 +39,14 @@ render(){
   return(
       <div>
         <table className="table table-striped">
+          <thead>
           <tr>
             <th>#</th><th>Name</th><th>Price</th><th>Product</th><th>Actions</th>
           </tr>
+          </thead>
+          <tbody>
             {nodeData}
+            </tbody>
           </table>
           <nav aria-label="Page navigation">
             <ul className="pagination">
@@ -57,7 +59,7 @@ render(){
 }
 
 ListItem.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 

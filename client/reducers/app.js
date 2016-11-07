@@ -1,25 +1,27 @@
-import {ADD_DATA, DELETE_DATA, UPDATE_DATA, LOAD_DATA,LOAD_INVENTORIES_SUCCESS,LOAD_INVENTORIES_FAILURE, ADD_INVENTORIES_SUCCESS, ADD_INVENTORIES_FAILURE} from '../constants/ActionTypes'
+import {ADD_DATA, DELETE_DATA, UPDATE_DATA, LOAD_DATA,LOAD_INVENTORIES_SUCCESS,LOAD_INVENTORIES_FAILURE, ADD_INVENTORIES_SUCCESS, ADD_INVENTORIES_FAILURE,PREPARE_SAVE} from '../constants/ActionTypes'
 
-const initialState = []
+const initialState ={dataInventories:[], totalRecord:1}
 
 export default function data(state = initialState, action){
   switch (action.type){
     case ADD_DATA:
-    console.log('ini state adddata',state)
     let dataArr = state.dataInventories
+    console.log('dataArr',dataArr);
     dataArr.push({
       id: action.id,
       name: action.name,
       price: action.price,
       url: action.url
     })
-    console.log('dataArr',dataArr);
     return dataArr
+
+    case PREPARE_SAVE:
+    return state
+
 
     case ADD_INVENTORIES_SUCCESS:
 
     let inventories = state
-    console.log('stateggggg', state)
     let idObject = inventories.map(function(x){
       return x.id
     }).indexOf(action.inventories.id)
@@ -48,7 +50,7 @@ export default function data(state = initialState, action){
       })
     return updatedData
     case LOAD_DATA:
-    return []
+    return state
     case LOAD_INVENTORIES_SUCCESS:
     return action.inventories
 
@@ -57,7 +59,6 @@ export default function data(state = initialState, action){
     return state;
 
     default:
-    console.log("ini state awal",state)
     return state
   }
 }

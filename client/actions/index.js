@@ -7,17 +7,37 @@ export function addData(id,name, price, url){
   return {type: types.ADD_DATA, id, name, price, url}
 }
 
+
+export function prepareSave(id, name, price, url){
+  return {type: "PREPARE_SAVE", id,name, price, url}
+}
+
+
+export function saveData(id, name, price, url){
+  return dispatch => {
+    dispatch(prepareSave(id,name,price,url))
+    return request.post(`${SERVER_URL}inventories/`).send({id: id, name: name, price: price, url: url}).end((err,res)=>{
+      if(err){
+        console.log(err)
+        dispatch(loadInventoriesFailure())
+      } else {
+        let product = res.body
+        dispatch(loadInventoriesSuccess(res.body))
+      }
+    })
+  }
+}
+
 export function deleteData(id){
   return {type: types.DELETE_DATA, id}
 }
 
-export function saveData(id,name,price,url){
-  return {type: types.UPDATE_DATA, id,name,price,url}
-}
+
 
 
 
 export function loadInventories(page){
+  console.log('page',page);
   return dispatch => {
     dispatch(loadData());
     return request
@@ -28,6 +48,7 @@ export function loadInventories(page){
           console.log(err);
           dispatch(loadInventoriesFailure())
         }else{
+          console.log('res.body',res.body);
           dispatch(loadInventoriesSuccess(res.body))
         }
       })
@@ -45,6 +66,7 @@ export function loadInventoriesFailure(){
 }
 
 export function loadInventoriesSuccess(inventories){
+  console.log('inventories',inventories);
   return {type: types.LOAD_INVENTORIES_SUCCESS, inventories}
 }
 

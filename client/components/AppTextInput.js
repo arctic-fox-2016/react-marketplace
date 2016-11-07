@@ -35,16 +35,16 @@ class AppTextInput extends Component{
 
   render(){
     const styleTBName = {
-      'text-transform': 'uppercase'
+      textTransform: 'uppercase'
     }
     return(
       <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
-        <div class="form-group">
-          <label for="Name"> Name</label>
+        <div className="form-group">
+          <label htmlFor="Name"> Name</label>
           <input className="form-control"  type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} style={styleTBName} />
-          <label for="Price"> Price</label>
+          <label htmlFor="Price"> Price</label>
           <input className="form-control"  type="text" value={this.state.price} onChange={this.handlePriceChange.bind(this)} />
-          <label for="Price"> URL</label>
+          <label htmlFor="Price"> URL</label>
           <input className="form-control"  type="text" value={this.state.url} onChange={this.handleUrlChange.bind(this)} />
           <button type="submit" className="btn btn-primary">Save</button>
         </div>
